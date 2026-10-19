@@ -20,7 +20,15 @@ interface AppContextType {
     logout: () => void;
 }
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+const getBackendUrl = () => {
+    let url = (import.meta.env.VITE_BACKEND_URL || "http://localhost:5000").trim();
+    if (url && !url.startsWith("http://") && !url.startsWith("https://")) {
+        url = `https://${url}`;
+    }
+    return url.replace(/\/+$/, "");
+};
+
+const BACKEND_URL = getBackendUrl();
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
