@@ -8,19 +8,27 @@ const connectDb = async () => {
 
     if (uri) {
         try {
-            console.log("Connecting to primary MongoDB URI...");
+            console.log("Connecting to MongoDB...");
             await mongoose.connect(uri);
             return;
         } catch (err) {
-            console.warn(`Primary MongoDB connection failed (${err.message}). Attempting fallback to local MongoDB...`);
+            console.error(`MongoDB connection failed: ${err.message}`);
+            process.exit(1); // Crash loudly so Render marks the deploy as failed
         }
     }
 
-    try {
-        console.log("Connecting to local MongoDB (mongodb://127.0.0.1:27017/seo)...");
-        await mongoose.connect("mongodb://127.0.0.1:27017/seo");
-    } catch (fallbackErr) {
-        console.error("Failed to connect to both primary and local MongoDB:", fallbackErr.message);
+    // Only attempt local fallback in development
+    if (process.env.NODE_ENV !== "production") {
+        try {
+            console.log("No URI set. Connecting to local MongoDB (mongodb://127.0.0.1:27017/seo)...");
+            await mongoose.connect("mongodb://127.0.0.1:27017/seo");
+        } catch (fallbackErr) {
+            console.error("Failed to connect to local MongoDB:", fallbackErr.message);
+            process.exit(1);
+        }
+    } else {
+        console.error("FATAL: mongodb_uri environment variable is not set. Cannot start server.");
+        process.exit(1);
     }
 };
 
