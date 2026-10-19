@@ -348,6 +348,3 @@ Contributions are always welcome! If you want to contribute:
 
 Distributed under the **ISC License**. See `LICENSE` for more information.
 
-<div align="center">
-  <sub>Built with ❤️ using React 19, Node.js, Express, and Google Gemini AI.</sub>
-</div>
