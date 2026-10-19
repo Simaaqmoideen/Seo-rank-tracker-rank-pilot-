@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="360" rx="16" fill="url(#bg2)" stroke="#1e293b" stroke-width="2"/>
+
+  <text x="480" y="40" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#f8fafc">SEO AUDIT &amp; ANALYSIS PIPELINE</text>
+
+  <!-- Step 1 -->
+  <g transform="translate(40, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad)" stroke="#3b82f6" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#1e3a8a"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#93c5fd">1</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">URL Ingestion</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Protocol validation</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Plan quota check</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Create DB record</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Return job ID</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <path d="M 225 195 L 265 195" stroke="#475569" stroke-width="2"/>
+  <polygon points="263,191 271,195 263,199" fill="#475569"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(275, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#064e3b"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#6ee7b7">2</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">DOM Scraping</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Axios HTTP fetch</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Cheerio HTML parse</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Meta &amp; OG tags</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• H1-H6, Links, Images</text>
+    <text x="90" y="195" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Page load timing</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <path d="M 460 195 L 500 195" stroke="#475569" stroke-width="2"/>
+  <polygon points="498,191 506,195 498,199" fill="#475569"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(510, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#4c1d95"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#c4b5fd">3</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Gemini Evaluation</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Gemini 2.5 Flash</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• JSON mode output</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Category grading</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Critical/Warning issues</text>
+    <text x="90" y="195" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Keyword densities</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <path d="M 695 195 L 735 195" stroke="#475569" stroke-width="2"/>
+  <polygon points="733,191 741,195 733,199" fill="#475569"/>
+
+  <!-- Step 4 -->
+  <g transform="translate(745, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#78350f"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#fde68a">4</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Report Delivery</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• DB updated: completed</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Client polling resolves</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• SVG score gauges</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Actionable tasks list</text>
+    <text x="90" y="195" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Stored in History</text>
+  </g>
+</svg>

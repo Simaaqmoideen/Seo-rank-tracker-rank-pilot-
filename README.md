@@ -1,129 +1,78 @@
-#  Rank Pilot — AI-Powered SEO Analyzer & Rank Tracker
+# Rank Pilot — SEO Audit & Google Keyword Rank Tracker
 
-<div align="center">
+A full-stack web application for crawling websites, generating diagnostic SEO audits via Google Gemini, and tracking organic Google SERP keyword rankings against competitors.
 
-![Rank Pilot Banner](docs/screenshots/dashboard-preview.jpg)
-
-**An intelligent, full-stack SEO platform that delivers comprehensive AI-driven website audits and real-time Google SERP rank tracking.**
-
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Express.js](https://img.shields.io/badge/Express-5.2-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Express.js](https://img.shields.io/badge/Express-5-000000?logo=express&logoColor=white)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Google Gemini](https://img.shields.io/badge/Google_Gemini-2.5_Flash-8E75B2?logo=google-gemini&logoColor=white)](https://ai.google.dev/)
+[![Gemini](https://img.shields.io/badge/Gemini_API-2.5_Flash-8E75B2?logo=google-gemini&logoColor=white)](https://ai.google.dev/)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](LICENSE)
 
-[Features](#-key-features) • [Architecture](#-architecture--data-flow) • [Screenshots](#-product-previews) • [Getting Started](#-getting-started) • [API Reference](#-api-reference)
+---
 
-</div>
+## Table of Contents
+
+- [Overview](#overview)
+- [System Architecture](#system-architecture)
+- [Core Workflows](#core-workflows)
+  - [1. Website Scraping & SEO Auditing](#1-website-scraping--seo-auditing)
+  - [2. Google SERP Rank Tracking](#2-google-serp-rank-tracking)
+- [Database Schema (ERD)](#database-schema-erd)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Backend Setup](#backend-setup)
+  - [Frontend Setup](#frontend-setup)
+- [API Endpoints](#api-endpoints)
+- [License](#license)
 
 ---
 
-## 📖 Overview
+## Overview
 
-**Rank Pilot** empowers developers, digital marketers, and SEO professionals to audit websites and monitor search engine visibility with speed and precision.
+Rank Pilot provides two primary utilities in a unified dashboard:
 
-Instead of generic heuristic scans, **Rank Pilot** uses high-speed web scraping via **Cheerio** combined with the cognitive capabilities of **Google Gemini (2.5 Flash)** to analyze technical structure, metadata, headings, content quality, and performance factors. It scores each domain across 4 primary pillars, extracts keyword densities, identifies critical vulnerabilities with actionable remediation steps, and tracks Google SERP rankings against live competitors.
-
----
-
-## 🌟 Key Features
-
-### 🔍 1. AI-Driven SEO Auditing
-- **Instant Web Scraping:** Extracts page size, load times, HTTP status, meta descriptions, canonicals, Open Graph/Twitter cards, heading hierarchies (`H1`–`H6`), and images missing `alt` attributes.
-- **Cognitive Diagnostics:** Evaluates websites across 4 key categories: **SEO**, **Performance**, **Accessibility**, and **Best Practices** (0–100 score).
-- **Prioritized Action Plan:** Classifies issues into **Critical**, **Warning**, and **Info** tiers with step-by-step developer recommendations.
-- **Keyword Density Extraction:** Surfaces the top 10 keywords and their content frequency.
-
-### 📈 2. Real-Time Google SERP Rank Tracker
-- **Position Tracking:** Monitors your website's exact organic rank on Google (Top 50 SERP results).
-- **Competitor Intelligence:** Automatically lists ranking competitors for every keyword along with title, URL, and snippet data.
-- **Position Delta:** Visual indicators show upward/downward ranking shifts over time.
-- **On-Demand Refresh:** Re-verify rankings instantly with one-click re-indexing.
-
-### 📊 3. Modern Analytics Dashboard & History
-- **Unified Overview:** Total scans conducted, average website health score, and remaining daily quota.
-- **Historical Vault:** Full searchable and filterable database of past audits with status badges (`completed`, `processing`, `failed`).
-- **Score Gauges:** Smooth SVG circular gauges with dynamic color transitions (Good 80+, Fair 50–79, Poor <50).
-
-### 🔒 4. Enterprise-Ready Architecture
-- **JWT Authentication:** Secure user authentication with encrypted password hashing (`bcrypt`).
-- **Quota Management:** Plan-based rate limiting (Free tier vs. Pro tier daily analysis caps).
-- **Polled Background Processing:** Asynchronous backend analysis prevents request timeouts during heavy scraping.
+1. **Website SEO Audits:** Accepts any URL, executes a server-side scrape using Cheerio and Axios to extract raw DOM elements, page size, load speed, and metadata, then passes the structured payload to the Gemini API (`gemini-2.5-flash`) for category scoring (SEO, Performance, Accessibility, Best Practices), keyword frequency extraction, and prioritized remediation suggestions.
+2. **Google SERP Rank Tracking:** Queries Google search across pages 1 to 5 (top 50 results) for specific target keywords, calculates position deltas against historical rankings, and aggregates competitor SERP titles, URLs, and snippets.
 
 ---
 
-## 🏗 Architecture & Data Flow
+## System Architecture
+
+![System Architecture](docs/diagrams/architecture.svg)
 
 ```mermaid
-graph TD
-    User([👤 User / Browser])
-    
-    subgraph Frontend ["Client (React 19 + Vite + Tailwind CSS)"]
-        UI[Interactive UI / Dashboard]
-        Router[React Router v7]
-        State[AppContext & Auth Token]
-    end
+graph LR
+    Client["React 19 Frontend<br/>(Vite, Tailwind CSS, Lucide)"]
+    API["Express 5 REST API<br/>(Node.js, JWT Middleware)"]
+    Scraper["Scraper Service<br/>(Axios + Cheerio)"]
+    Gemini["Google Gemini API<br/>(gemini-2.5-flash)"]
+    SERP["Google Search Engine<br/>(SERP Results Pages 1-5)"]
+    DB[("MongoDB Atlas<br/>(Users, Analyses, Ranks)")]
 
-    subgraph Backend ["Server (Node.js + Express 5)"]
-        API[Express REST API]
-        AuthMid[JWT Auth Middleware]
-        Scraper[Scraper Engine: Axios + Cheerio]
-        AIService[AI Diagnostics: Google Gemini 2.5]
-    end
-
-    subgraph External ["External Services"]
-        GoogleSERP[Google Search Engine]
-        GeminiAPI[Google Generative Language API]
-        MongoDB[(MongoDB Atlas Database)]
-    end
-
-    User <--> UI
-    UI <--> Router
-    UI <--> State
-    State <--> API
-
-    API --> AuthMid
-    AuthMid --> Scraper
-    AuthMid --> AIService
-
-    Scraper -->|Scrapes Web Page| User
-    Scraper -->|Scrapes SERP Results| GoogleSERP
-    AIService -->|Sends Scraped Structure| GeminiAPI
-    GeminiAPI -->|Returns JSON Audit & Scores| AIService
-
-    API <-->|Persists Users, Audits, Ranks| MongoDB
+    Client <-->|HTTP / REST + Bearer JWT| API
+    API <-->|Mongoose ODM| DB
+    API -->|1. Scrapes Target URL| Scraper
+    Scraper -->|2. Returns Parsed DOM & Metadata| API
+    API -->|3. Payload to Model| Gemini
+    Gemini -->|4. Returns Structured JSON Audit| API
+    API -->|Checks Keyword Positions| SERP
 ```
 
 ---
 
-## 📸 Product Previews
+## Core Workflows
 
-### 1. Analytics & Overview Dashboard
-> Central command center displaying real-time metrics, quick URL scanner, and recent audits.
+### 1. Website Scraping & SEO Auditing
 
-![Dashboard Preview](docs/screenshots/dashboard-preview.jpg)
+The audit process runs asynchronously to eliminate client request timeouts during scraping and AI evaluation:
 
----
-
-### 2. Deep-Dive AI Audit Report
-> Comprehensive audit breakdown featuring circular gauges, 4 core pillar scores, prioritized issues, and keyword densities.
-
-![Audit Report Preview](docs/screenshots/audit-report-preview.jpg)
-
----
-
-### 3. Google Keyword Rank Tracker
-> Monitor ranking positions on Google, competitor SERP snippets, and rank trajectory.
-
-![Rank Tracker Preview](docs/screenshots/rank-tracker-preview.jpg)
-
----
-
-## 🔄 Audit Lifecycle & Sequence
+![Audit Pipeline Diagram](docs/diagrams/pipeline.svg)
 
 ```mermaid
 sequenceDiagram
@@ -131,49 +80,79 @@ sequenceDiagram
     actor User as User
     participant Client as React Client
     participant Server as Express Server
-    participant DB as MongoDB Atlas
-    participant Scraper as Cheerio Scraper
-    participant Gemini as Google Gemini AI
+    participant DB as MongoDB
+    participant Web as Target Website
+    participant Gemini as Gemini 2.5 API
 
-    User->>Client: Enters URL & clicks "Analyze"
+    User->>Client: Enter target URL & submit
     Client->>Server: POST /api/analysis { url }
-    Server->>DB: Create record (status: "processing")
-    Server-->>Client: 201 Created { analysisId }
+    Server->>DB: Insert document with status: "processing"
+    Server-->>Client: Return { analysisId }
     
-    Note over Client: Client starts animated progress & polling
+    Note over Client: Client starts polling every 3s
 
-    par Background Worker
-        Server->>Scraper: Fetch HTML, parse tags, headings & links
-        Scraper-->>Server: Return structured scraping data
-        Server->>Gemini: POST Prompt with Scraped Data (gemini-2.5-flash)
-        Gemini-->>Server: Structured JSON (Scores, Issues, Keywords)
-        Server->>DB: Update record (status: "completed", scores, issues)
-    and Client Polling
+    par Asynchronous Processing
+        Server->>Web: Axios GET (Timeout 20s, Max 5MB)
+        Web-->>Server: Raw HTML
+        Server->>Server: Cheerio extraction (meta, headings, images, links)
+        Server->>Gemini: generateContent (Structured JSON Mode)
+        Gemini-->>Server: JSON Audit { overallScore, categories, issues, keywords }
+        Server->>DB: Update document (status: "completed", auditData)
+    and Polling Loop
         loop Every 3 seconds
             Client->>Server: GET /api/analysis/:id
-            Server->>DB: Query analysis status
-            DB-->>Server: Current document
-            Server-->>Client: Return status
+            Server->>DB: Find by _id
+            DB-->>Server: Document status
+            Server-->>Client: { analysis: { status } }
         end
     end
 
-    Client->>User: Redirects to /report/:id & renders audit
+    Client->>User: Redirects to /report/:id
+```
+
+#### What Gets Scraped:
+- **Meta Tags:** Title tag length, meta description length, canonical URL, robots meta, Open Graph tags, Twitter Card tags, viewport, charset.
+- **Headings:** Count of `H1` through `H6`, and text content of first 5 `H1` tags.
+- **Links:** Internal link count, external link count, and total link volume.
+- **Images:** Total image count, images with `alt` text, images missing `alt` attributes.
+- **Content:** Load duration (ms), total page size (bytes), word count, and extracted body text.
+
+---
+
+### 2. Google SERP Rank Tracking
+
+The rank tracker queries Google search results across pages 1 to 5 to find where the target domain ranks for a specific query:
+
+![Rank Tracking Diagram](docs/diagrams/rank-tracking.svg)
+
+```mermaid
+flowchart TD
+    A[Start: Keyword + Target URL] --> B[Extract Target Hostname]
+    B --> C[Fetch Google Search Results: Pages 1-5]
+    C --> D{Target Domain Found?}
+    D -- Yes --> E[Record Rank Position 1-50 & Page Number]
+    D -- No --> F[Mark as Not in Top 50]
+    E --> G[Calculate Position Delta from Previous Check]
+    F --> G
+    G --> H[Extract Competitor Titles, URLs & Snippets]
+    H --> I[Save Record to MongoDB]
+    I --> J[Render Rank Badges & SERP Competitors Table]
 ```
 
 ---
 
-## 🗄️ Database Entity Relationship Diagram (ERD)
+## Database Schema (ERD)
 
 ```mermaid
 erDiagram
-    USER ||--o{ ANALYSIS : initiates
-    USER ||--o{ RANK : monitors
+    USER ||--o{ ANALYSIS : creates
+    USER ||--o{ RANK : tracks
 
     USER {
         ObjectId _id PK
         string name
         string email UK
-        string password
+        string password "hashed with bcrypt"
         string plan "free | pro"
         number analysisCount
         date lastAnalysisDate
@@ -189,7 +168,7 @@ erDiagram
         string error
         number overallScore
         object categories "seo, performance, accessibility, bestPractices"
-        object metaData "title, description, canonical, robots, ogTags..."
+        object metaData "title, description, canonical, robots, ogTitle..."
         object headings "h1, h2, h3, h4, h5, h6, h1Texts"
         object links "internal, external, total"
         object images "total, withAlt, missingAlt"
@@ -221,130 +200,162 @@ erDiagram
 
 ---
 
-## 💻 Tech Stack
+## Project Structure
 
-| Domain | Technology | Purpose |
-|---|---|---|
-| **Frontend Framework** | React 19 + TypeScript | Component-based reactive UI |
-| **Build Tooling** | Vite 8 | Ultra-fast HMR and production bundling |
-| **Styling** | Tailwind CSS v4 | Utility-first responsive design tokens |
-| **Icons** | Lucide React | Modern, clean vector iconography |
-| **Routing** | React Router v7 | Single Page Application client routing |
-| **Backend Framework** | Node.js + Express 5 | High-performance RESTful API microservice |
-| **Database** | MongoDB Atlas + Mongoose 9 | NoSQL document storage & schema modeling |
-| **AI Intelligence** | Google Generative AI | High-speed structured JSON SEO evaluation |
-| **Web Scraping** | Axios + Cheerio | Fast HTTP fetching and server-side DOM parsing |
-| **Authentication** | JWT (`jsonwebtoken`) + `bcrypt` | Stateless, cryptographically secure token auth |
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-Make sure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (v18.0.0 or higher)
-- [npm](https://www.npmjs.com/) (v9.0.0 or higher)
-- A [MongoDB Atlas](https://www.mongodb.com/atlas) cluster connection string or local MongoDB instance.
-- A free [Google Gemini API Key](https://aistudio.google.com/).
-
----
-
-### Step 1: Clone Repository
-
-```bash
-git clone https://github.com/your-username/seo-rank-tracker.git
-cd seo-rank-tracker
+```text
+seo-rank-tracker/
+├── client/                     # Frontend Application
+│   ├── src/
+│   │   ├── components/         # Reusable UI Components
+│   │   │   ├── AnalysesCard.tsx# Scan history cards
+│   │   │   ├── IssueCard.tsx   # Categorized SEO recommendations
+│   │   │   ├── Navbar.tsx      # Main navigation & theme switch
+│   │   │   ├── ProtectedRoute.tsx # Route authentication guard
+│   │   │   └── ScoreGauge.tsx  # Dynamic SVG circular score visualizer
+│   │   ├── context/
+│   │   │   ├── AppContext.tsx  # Auth state, login/logout, Axios instance
+│   │   │   └── ThemeContext.tsx# Dark/Light theme state
+│   │   ├── pages/
+│   │   │   ├── Analyze.tsx     # URL submission & real-time progress steps
+│   │   │   ├── Dashboard.tsx   # User metrics, quick scan & recent audits
+│   │   │   ├── History.tsx     # Paginated audit list with search & filter
+│   │   │   ├── Home.tsx        # Public landing view
+│   │   │   ├── Login.tsx       # Auth forms (sign in / sign up)
+│   │   │   ├── RankDetail.tsx  # Deep dive into keyword competitors
+│   │   │   ├── RankTracker.tsx # Google keyword ranking dashboard
+│   │   │   └── Report.tsx      # Complete SEO audit report view
+│   │   ├── App.tsx             # Route declarations
+│   │   └── main.tsx            # Application entry point
+│   └── package.json
+│
+├── server/                     # Backend API Microservice
+│   ├── config/
+│   │   └── db.js               # MongoDB connection setup
+│   ├── controller/
+│   │   ├── analysisController.js # Scraping logic & Gemini API handler
+│   │   ├── authcontroller.js   # User registration, login & profile
+│   │   └── rankController.js   # Google SERP scraping & position parsing
+│   ├── middleware/
+│   │   └── auth.js             # JWT bearer verification middleware
+│   ├── model/
+│   │   ├── analysisModel.js    # Audit document schema
+│   │   ├── model.js            # User credentials & tier schema
+│   │   └── rankModel.js        # Keyword & SERP competitor schema
+│   ├── routes/
+│   │   ├── analysisRoutes.js   # /api/analysis routes
+│   │   ├── authRoutes.js       # /api/auth routes
+│   │   └── rankRoutes.js       # /api/rank routes
+│   ├── server.js               # Express application entry point
+│   └── package.json
+│
+└── docs/
+    └── diagrams/               # Architecture and data pipeline SVG diagrams
 ```
 
 ---
 
-### Step 2: Configure & Start the Backend
+## Tech Stack
 
-1. Navigate to the `server` directory and install dependencies:
+| Component | Technology | Usage |
+|---|---|---|
+| **Frontend Framework** | React 19 + TypeScript | UI layer, state hooks, and type safety |
+| **Build Tooling** | Vite 8 | Fast dev server and client build orchestration |
+| **Styling** | Tailwind CSS v4 | CSS utility tokens and dark/light color scheme |
+| **Icons** | Lucide React | Clean, scalable vector icons |
+| **Routing** | React Router v7 | Client-side routing, protected routes, and redirects |
+| **Notifications** | React Hot Toast | User toast alerts for async events |
+| **Backend Framework** | Node.js + Express 5 | RESTful API server with ES Modules |
+| **Database** | MongoDB Atlas + Mongoose 9 | Document storage for users, audits, and rank tracking |
+| **Web Scraping** | Axios + Cheerio | Fast HTTP fetching and server-side DOM traversing |
+| **AI Evaluation** | `@google/generative-ai` | SEO diagnostics with fallback support (`gemini-2.5-flash`) |
+| **Auth & Security** | JWT + `bcrypt` | Token-based authorization and secure password hashing |
+
+---
+
+## Getting Started
+
+### Prerequisites
+- **Node.js** (v18.0.0 or higher)
+- **npm** (v9.0.0 or higher)
+- **MongoDB Atlas** cluster connection URI (or local MongoDB)
+- **Google Gemini API Key** from [Google AI Studio](https://aistudio.google.com/)
+
+---
+
+### Backend Setup
+
+1. Open your terminal and enter the `server` directory:
    ```bash
    cd server
    npm install
    ```
 
-2. Create a `.env` file in `server/`:
+2. Create a `.env` file inside `server/`:
    ```env
    PORT=5000
-   JWT_SECRET=your_jwt_secret_key_here
+   JWT_SECRET=your_jwt_secret_key
    mongodb_uri=mongodb+srv://<username>:<password>@cluster0.mongodb.net/seo
-   GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_API_KEY=your_gemini_api_key
    GEMINI_MODEL=gemini-2.5-flash
    ```
 
-3. Start the backend development server:
+3. Start the backend:
    ```bash
    npm run dev
    ```
-   *The server will start on `http://localhost:5000`.*
+   *The server runs at `http://localhost:5000`.*
 
 ---
 
-### Step 3: Configure & Start the Frontend
+### Frontend Setup
 
-1. Open a new terminal, navigate to the `client` directory, and install dependencies:
+1. In a new terminal window, navigate to the `client` directory:
    ```bash
    cd client
    npm install
    ```
 
-2. Create a `.env` file in `client/`:
+2. Create a `.env` file inside `client/`:
    ```env
    VITE_BACKEND_URL=http://localhost:5000
    ```
 
-3. Launch the Vite client:
+3. Launch the client:
    ```bash
    npm run dev
    ```
-   *The client will start on `http://localhost:5173`.*
+   *The client runs at `http://localhost:5173`.*
 
 ---
 
-## 📡 API Reference
+## API Endpoints
 
-### 🔐 Authentication (`/api/auth`)
-| Method | Endpoint | Description | Auth Required |
+### 🔐 Auth (`/api/auth`)
+| Method | Endpoint | Description | Auth |
 |---|---|---|:---:|
-| `POST` | `/api/auth/register` | Register a new user | ❌ No |
-| `POST` | `/api/auth/login` | Log in and receive JWT token | ❌ No |
-| `GET` | `/api/auth/user` | Retrieve authenticated user profile | ✅ Yes |
+| `POST` | `/api/auth/register` | Create a new user account | No |
+| `POST` | `/api/auth/login` | Log in and receive JWT token | No |
+| `GET` | `/api/auth/user` | Get profile of logged-in user | Yes |
 
-### 🔍 Website SEO Audits (`/api/analysis`)
-| Method | Endpoint | Description | Auth Required |
+### 🔍 Analysis (`/api/analysis`)
+| Method | Endpoint | Description | Auth |
 |---|---|---|:---:|
-| `POST` | `/api/analysis` | Initiate a new site crawl & AI analysis | ✅ Yes |
-| `GET` | `/api/analysis` | Get paginated list of previous scans (`?page=1&limit=20`) | ✅ Yes |
-| `GET` | `/api/analysis/:id` | Fetch detailed report data and status | ✅ Yes |
-| `DELETE`| `/api/analysis/:id` | Remove an analysis from history | ✅ Yes |
+| `POST` | `/api/analysis` | Queue a website scan & AI audit (`{ url }`) | Yes |
+| `GET` | `/api/analysis` | Fetch paginated scan history (`?page=1&limit=20`) | Yes |
+| `GET` | `/api/analysis/:id` | Get status and report for an audit ID | Yes |
+| `DELETE`| `/api/analysis/:id` | Delete an audit record | Yes |
 
-### 📈 SERP Rank Tracking (`/api/rank`)
-| Method | Endpoint | Description | Auth Required |
+### 📈 Rank Tracker (`/api/rank`)
+| Method | Endpoint | Description | Auth |
 |---|---|---|:---:|
-| `POST` | `/api/rank` | Track a new keyword for a specific URL | ✅ Yes |
-| `GET` | `/api/rank` | Get all tracked keywords with current positions | ✅ Yes |
-| `GET` | `/api/rank/:id` | Get single keyword ranking & competitor list | ✅ Yes |
-| `POST` | `/api/rank/:id/refresh` | Force live Google re-check for keyword | ✅ Yes |
-| `DELETE`| `/api/rank/:id` | Delete a tracked keyword | ✅ Yes |
+| `POST` | `/api/rank` | Track a keyword + target URL (`{ keyword, url }`) | Yes |
+| `GET` | `/api/rank` | Retrieve all tracked keywords | Yes |
+| `GET` | `/api/rank/:id` | Fetch keyword details & competitor list | Yes |
+| `POST` | `/api/rank/:id/refresh` | Re-scrape live Google SERP for keyword | Yes |
+| `DELETE`| `/api/rank/:id` | Remove a tracked keyword | Yes |
 
 ---
 
-## 🤝 Contributing
+## License
 
-Contributions are always welcome! If you want to contribute:
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the **ISC License**. See `LICENSE` for more information.
-
+This project is licensed under the [ISC License](LICENSE).

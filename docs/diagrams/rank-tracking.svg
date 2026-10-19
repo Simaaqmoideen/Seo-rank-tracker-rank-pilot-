@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="360" rx="16" fill="url(#bg3)" stroke="#1e293b" stroke-width="2"/>
+
+  <text x="480" y="40" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#f8fafc">GOOGLE SERP RANK TRACKING FLOW</text>
+
+  <!-- Step 1: Input -->
+  <g transform="translate(40, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad3)" stroke="#0ea5e9" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#0369a1"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#bae6fd">1</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Keyword Input</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Search query term</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Target website URL</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Hostname extraction</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Normalize domains</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 225 195 L 265 195" stroke="#475569" stroke-width="2"/>
+  <polygon points="263,191 271,195 263,199" fill="#475569"/>
+
+  <!-- Step 2: Search Query -->
+  <g transform="translate(275, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad3)" stroke="#06b6d4" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#155e75"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#a5f3fc">2</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">SERP Scraping</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Google query execution</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Pages 1 to 5 checked</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• 50 organic results</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Browser headers/agent</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 460 195 L 500 195" stroke="#475569" stroke-width="2"/>
+  <polygon points="498,191 506,195 498,199" fill="#475569"/>
+
+  <!-- Step 3: Match & Extraction -->
+  <g transform="translate(510, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad3)" stroke="#14b8a6" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#115e59"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#99f6e4">3</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">SERP Analysis</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Match target domain</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Record current rank</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Compute rank delta</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Collect competitor list</text>
+  </g>
+
+  <!-- Arrow -->
+  <path d="M 695 195 L 735 195" stroke="#475569" stroke-width="2"/>
+  <polygon points="733,191 741,195 733,199" fill="#475569"/>
+
+  <!-- Step 4: Display -->
+  <g transform="translate(745, 80)">
+    <rect width="180" height="230" rx="10" fill="url(#cardGrad3)" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="90" cy="35" r="18" fill="#065f46"/>
+    <text x="90" y="41" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#a7f3d0">4</text>
+    <text x="90" y="80" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Rank Intelligence</text>
+    <text x="90" y="115" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Saved to MongoDB</text>
+    <text x="90" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Rank badge (#1, #5...)</text>
+    <text x="90" y="155" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Delta indicators (↑/↓)</text>
+    <text x="90" y="175" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Competitor SERP modal</text>
+  </g>
+</svg>

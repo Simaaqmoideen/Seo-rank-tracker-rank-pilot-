@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="blueCard" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accentGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="960" height="480" rx="16" fill="url(#bg)" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Title -->
+  <text x="480" y="44" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" fill="#f8fafc" letter-spacing="0.5">SYSTEM ARCHITECTURE</text>
+  <line x1="380" y1="58" x2="580" y2="58" stroke="url(#accentGlow)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- LAYER 1: CLIENT -->
+  <g transform="translate(40, 90)">
+    <rect width="250" height="340" rx="12" fill="url(#blueCard)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect width="250" height="40" rx="12" fill="#1e293b"/>
+    <rect y="28" width="250" height="12" fill="#1e293b"/>
+    <text x="125" y="26" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#60a5fa">CLIENT (SPA)</text>
+    
+    <g transform="translate(15, 60)">
+      <rect width="220" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">React 19 + TypeScript</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">Vite 8 • Single Page App</text>
+    </g>
+
+    <g transform="translate(15, 120)">
+      <rect width="220" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">Tailwind CSS v4</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">Dark / Light UI Tokens</text>
+    </g>
+
+    <g transform="translate(15, 180)">
+      <rect width="220" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">AppContext &amp; State</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">JWT Auth Token • Axios Client</text>
+    </g>
+
+    <g transform="translate(15, 240)">
+      <rect width="220" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">Interactive Views</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">Dashboard, Audits, Rank Tracker</text>
+    </g>
+  </g>
+
+  <!-- Connectors Client -> Server -->
+  <g stroke="#3b82f6" stroke-width="2" fill="none" stroke-dasharray="4,4">
+    <path d="M 290 260 L 355 260"/>
+  </g>
+  <polygon points="353,256 361,260 353,264" fill="#3b82f6"/>
+
+  <!-- LAYER 2: BACKEND -->
+  <g transform="translate(360, 90)">
+    <rect width="260" height="340" rx="12" fill="url(#blueCard)" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+    <rect width="260" height="40" rx="12" fill="#1e293b"/>
+    <rect y="28" width="260" height="12" fill="#1e293b"/>
+    <text x="130" y="26" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#34d399">BACKEND API</text>
+
+    <g transform="translate(15, 60)">
+      <rect width="230" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">Node.js + Express 5</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">REST API • ES Modules</text>
+    </g>
+
+    <g transform="translate(15, 120)">
+      <rect width="230" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">Auth &amp; Rate Limiting</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">JWT Verification • Bcrypt Hash</text>
+    </g>
+
+    <g transform="translate(15, 180)">
+      <rect width="230" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">Web Scraper Engine</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">Axios + Cheerio HTML Parser</text>
+    </g>
+
+    <g transform="translate(15, 240)">
+      <rect width="230" height="48" rx="8" fill="#0f172a" stroke="#1e293b"/>
+      <text x="15" y="22" font-family="sans-serif" font-size="13" font-weight="600" fill="#f1f5f9">Google SERP Tracker</text>
+      <text x="15" y="38" font-family="sans-serif" font-size="11" fill="#94a3b8">Top 50 Ranks • Competitor Extraction</text>
+    </g>
+  </g>
+
+  <!-- Connectors Server -> External Services -->
+  <g stroke="#10b981" stroke-width="2" fill="none" stroke-dasharray="4,4">
+    <path d="M 620 180 L 685 180"/>
+    <path d="M 620 320 L 685 320"/>
+  </g>
+  <polygon points="683,176 691,180 683,184" fill="#10b981"/>
+  <polygon points="683,316 691,320 683,324" fill="#10b981"/>
+
+  <!-- LAYER 3: EXTERNAL SERVICES & DATABASE -->
+  <g transform="translate(690, 90)">
+    <!-- Gemini Card -->
+    <rect width="230" height="100" rx="10" fill="url(#blueCard)" stroke="#475569" stroke-width="1.5" filter="url(#shadow)"/>
+    <text x="115" y="28" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#a78bfa">GEMINI 2.5 FLASH</text>
+    <text x="115" y="52" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#e2e8f0">SEO Health Scoring (0-100)</text>
+    <text x="115" y="70" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Category Grading &amp; Issues</text>
+    <text x="115" y="86" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Top Keyword Extraction</text>
+
+    <!-- Google Search Card -->
+    <g transform="translate(0, 115)">
+      <rect width="230" height="100" rx="10" fill="url(#blueCard)" stroke="#475569" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="115" y="28" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#38bdf8">GOOGLE SEARCH (SERP)</text>
+      <text x="115" y="52" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#e2e8f0">Live Query Execution</text>
+      <text x="115" y="70" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Pages 1-5 SERP Extraction</text>
+      <text x="115" y="86" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">Competitor Titles &amp; Snippets</text>
+    </g>
+
+    <!-- MongoDB Atlas Card -->
+    <g transform="translate(0, 230)">
+      <rect width="230" height="110" rx="10" fill="url(#blueCard)" stroke="#475569" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="115" y="28" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#4ade80">MONGODB ATLAS</text>
+      <text x="115" y="52" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#e2e8f0">Mongoose Schema Models</text>
+      <text x="115" y="72" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Users &amp; Credentials</text>
+      <text x="115" y="88" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Analyses &amp; Audit Reports</text>
+      <text x="115" y="102" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#94a3b8">• Tracked Keywords &amp; Ranks</text>
+    </g>
+  </g>
+</svg>
